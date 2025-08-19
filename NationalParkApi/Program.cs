@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NationalParkApi.Data;
+using NationalParkApi.Repository;
+using NationalParkApi.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,10 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("conStr") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<INationalParkRepository, NationalParkRepository>();
+
+builder.Services.AddScoped<ITrailRepository, TrailRepository>();
 
 var app = builder.Build();
 
