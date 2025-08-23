@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NationalParkApi.Data;
+using NationalParkApi.DTOMapping;
 using NationalParkApi.Repository;
 using NationalParkApi.Repository.IRepository;
 
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<INationalParkRepository, NationalParkRepository>();
 
 builder.Services.AddScoped<ITrailRepository, TrailRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
